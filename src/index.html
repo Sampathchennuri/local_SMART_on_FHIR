@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SMART on FHIR Application</title>
+  </head>
+  <body>
+    <div id="demoBar">
+      <ul class="chld-mo-demobar">
+        <li>
+          <dt class="demo-data">Name:</dt>
+          <dd id="demo-name">&nbsp;</dd>
+        </li>
+        <li>
+          <dt class="demo-data">Gender:</dt>
+          <dd id="demo-gender">&nbsp;</dd>
+        </li>
+        <li>
+          <dt class="demo-data">DOB:</dt>
+          <dd id="demo-dob">&nbsp;</dd>
+        </li>
+        <li>
+          <dt class="demo-data">Age:</dt>
+          <dd id="demo-age">&nbsp;</dd>
+        </li>
+        <li>
+          <dt>MRN:</dt>
+          <dd id="demo-mrn">&nbsp;</dd>
+        </li>
+        <li>
+          <dt>FIN:</dt>
+          <dd id="demo-fin">&nbsp;</dd>
+        </li>
+        <li>
+          <dt>Location:</dt>
+          <dd id="demo-loc">&nbsp;</dd>
+        </li>
+        <li>
+          <dt>Visit Reason:</dt>
+          <dd id="demo-rfv">&nbsp;</dd>
+        </li>
+      </ul>
+    </div>
+    <div id="errors"></div>
+    <div id="loading" class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+    <div id="holder">
+      <h2>Example-SMART-App</h2>
+
+      <h2>Patient Resource</h2>
+      <table>
+        <tr>
+          <th>First Name:</th>
+          <td id="fname"></td>
+        </tr>
+        <tr>
+          <th>Last Name:</th>
+          <td id="lname"></td>
+        </tr>
+        <tr>
+          <th>Gender:</th>
+          <td id="gender"></td>
+        </tr>
+        <tr>
+          <th>Date of Birth:</th>
+          <td id="birthdate"></td>
+        </tr>
+      </table>
+
+      <h2>Observation Resource</h2>
+      <table border="1" class="table_demographcis">
+        <tr>
+          <th>Height:</th>
+          <td id="height"></td>
+        </tr>
+        <tr>
+          <th>Systolic Blood Pressure:</th>
+          <td id="systolicbp"></td>
+        </tr>
+        <tr>
+          <th>Diastolic Blood Pressure:</th>
+          <td id="diastolicbp"></td>
+        </tr>
+        <tr>
+          <th>LDL:</th>
+          <td id="ldl"></td>
+        </tr>
+        <tr>
+          <th>HDL:</th>
+          <td id="hdl"></td>
+        </tr>
+      </table>
+    </div>
+    <!-- Required JS files to enable this page to embed within an MPage -->
+    <!--
+      Temporarily disable cerner-smart-embeddable-lib
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js'></script>
+      <script src='./lib/js/cerner-smart-embeddable-lib-1.0.0.min.js'></script>
+    -->
+
+    <!-- FHIR Client JS Library -->
+    <script src="./lib/fhir-client-v0.1.12.js"></script>
+
+    <!-- Prevent session bleed caused by single threaded embedded browser and sessionStorage API -->
+    <!-- https://github.com/cerner/fhir-client-cerner-additions -->
+    <script src="./lib/fhir-client-cerner-additions-1.0.0.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+      console.log("INSIDE HTML PAGE !!!!");
+
+      function ready(smart) {
+        if (typeof smart.patient === "object") {
+          console.log(smart);
+          var patientApi = smart.patient.api;
+        }
+        patientApi.fetchAll({ type: "Patient" }).then(function(response) {
+          console.log(response);
+        });
+      }
+      function notReady(response) {
+        if (window.location.href.indexOf("error") < 0) {
+          document.body.innerText = "Launch first.";
+        }
+      }
+      FHIR.oauth2.ready(ready, notReady);
+    </script>
+  </body>
+</html>

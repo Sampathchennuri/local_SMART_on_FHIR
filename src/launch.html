@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>SMART on FHIR</title>
+  </head>
+  <body>
+    <!-- Required JS files to enable this page to embed within an MPage -->
+    <!-- FHIR Client JS Library -->
+    <script src="./lib/fhir-client-v0.1.12.js"></script>
+
+    <!-- Prevent session bleed caused by single threaded embedded browser and sessionStorage API -->
+    <!-- https://github.com/cerner/fhir-client-cerner-additions -->
+    <script src="./lib/fhir-client-cerner-additions-1.0.0.js"></script>
+    <script>
+      FHIR.oauth2.authorize({
+        client_id: "2effcb7a-e1b1-4651-8c76-7c596f8d1032",
+        scope:
+          "user/Patient.read user/Observation.read user/Encounter.read launch online_access"
+      });
+    </script>
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  </body>
+</html>

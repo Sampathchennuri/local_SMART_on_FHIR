@@ -1,0 +1,23 @@
+{
+  "name": "local_smart_on_fhir",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sampathchennuri/local_SMART_on_FHIR.git"
+  },
+  "author": "Sampath Chennuri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sampathchennuri/local_SMART_on_FHIR/issues"
+  },
+  "homepage": "https://github.com/Sampathchennuri/local_SMART_on_FHIR#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "path": "^0.12.7"
+  }
+}
